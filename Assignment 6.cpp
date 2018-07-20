@@ -18,9 +18,9 @@ Can I essentually echo the character a user types?
 #include <iomanip>
 //#include <math.h>
 #include <fstream>
-#include <cstring>
+#include <string>
 #include <conio.h>
-#include <regex>
+//#include <regex>
 #ifdef _WIN32
   #include <winsock2.h>
   #include <windows.h>
@@ -28,6 +28,9 @@ Can I essentually echo the character a user types?
 #ifdef __linux__
 
 #endif
+
+#define ASSIGNMENT "CSCI 14 Assignment 6"
+
 
 using namespace std;
 
@@ -47,19 +50,38 @@ int main ()
 
 
   CharacterChanger ConverterTable[254];
-  string UserInput;
 
+//Variables
+  string UserInput;
   char TestChar;
+
+
+//Program
+  SetConsoleTitle(ASSIGNMENT);
+  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | FOREGROUND_INTENSITY );
   cout << "Type in what you want to translate.  Press enter to send." << endl;
   cout << "Single space between letters and double space between words." << endl;
 //rough idea on how to interactively pull character input.
+
   do {
     TestChar = _getch();
-    cout << TestChar;
-    //cout << "Some String ";
-  }while (TestChar != '\n');
+
+    //test to make certain if valid character for Alpha or Morse.  If valid output to screen and store in string otherwise ignore.
+
+    //     Capitol Letters                                  Lowercase Letters                                      Numeric                                             space                   period                   Dash
+    if ( ((int(TestChar) >= 65) && (int(TestChar <= 90))) || ((int(TestChar) >= 97) && (int(TestChar) <= 122)) || ((int(TestChar) >= 48) && (int(TestChar) <= 57)) || (int(TestChar) == 32) || (int(TestChar) == 46) || (int(TestChar) == 45) )
+    {
+      cout << TestChar; //<< " Integer value " << int(TestChar);
+      UserInput.append(1,TestChar);
+    }
+
+  }while (int(TestChar) != 13);
   cout << endl;
   system("pause");
+
+  system("cls");
+  cout << "You typed" << endl;
+  cout << UserInput;
 }
 
 void CharacterTableFill(CharacterChanger ArraytoFill[])
