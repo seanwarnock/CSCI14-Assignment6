@@ -13,14 +13,14 @@ and a second list of Morse characters.
 Can I essentually echo the character a user types?
 */
 
+//#include <math.h>
+//#include <regex>
 //#include <time.h>
 #include <iostream>
 #include <iomanip>
-//#include <math.h>
 #include <fstream>
 #include <string>
 #include <conio.h>
-//#include <regex>
 #ifdef _WIN32
   #include <winsock2.h>
   #include <windows.h>
