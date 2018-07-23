@@ -36,23 +36,26 @@ using namespace std;
 
 
 
-struct CharacterChanger
+struct CharacterList
    {
     char MorseChar[6];
     char AlphaChar;
     // character converter.. use ASCII values to match.
   };
 
-void CharacterTableFill(CharacterChanger[] );
+string CharacaterChanger(string);
+string CharacaterChanger(char);
 
 int main ()
 {
 
 
-  CharacterChanger ConverterTable[254];
+  //CharacterChanger ConverterTable[254];
 
 //Variables
   string UserInput;
+  string AlphaString;
+  string MorseString;
   char TestChar;
 
 
@@ -68,12 +71,27 @@ int main ()
 
     //test to make certain if valid character for Alpha or Morse.  If valid output to screen and store in string otherwise ignore.
 
-    //     Capitol Letters                                  Lowercase Letters                                      Numeric                                             space                   period                   Dash
-    if ( ((int(TestChar) >= 65) && (int(TestChar <= 90))) || ((int(TestChar) >= 97) && (int(TestChar) <= 122)) || ((int(TestChar) >= 48) && (int(TestChar) <= 57)) || (int(TestChar) == 32) || (int(TestChar) == 46) || (int(TestChar) == 45) )
+    if ((int(TestChar) == 45) || (int(TestChar) == 46))
+    {
+      //Enter Morse loop.  Loop through up to five characters to test for junk.  If alpha or space break out of loop and return to main loop processing.
+      cout << TestChar;
+      UserInput.append(1,TestChar);
+      cout << CharacaterChanger(".");
+
+    }
+
+    //if Alpha send to conversion.
+    //If period or underscore store up to five char until space else throw error of some kind.  Once characters are pulled send to conversion.
+    //     Capitol Letters                                  Lowercase Letters                                      Numeric                                             space
+    if ( ((int(TestChar) >= 65) && (int(TestChar <= 90))) || ((int(TestChar) >= 97) && (int(TestChar) <= 122)) || ((int(TestChar) >= 48) && (int(TestChar) <= 57)) || (int(TestChar) == 32) )
     {
       cout << TestChar; //<< " Integer value " << int(TestChar);
       UserInput.append(1,TestChar);
+      cout << CharacaterChanger(TestChar);
     }
+
+    //period                   Dash
+
 
   }while (int(TestChar) != 13);
   cout << endl;
@@ -84,10 +102,140 @@ int main ()
   cout << UserInput;
 }
 
-void CharacterTableFill(CharacterChanger ArraytoFill[])
+string CharacaterChanger(string charTestString)
 {
 /*
  pack the array with the entire ASCII 256 table.  Then fill the Morse side
 of the array with the matching Morse string.
 */
+
+//if Alpha send to conversion.
+//If period or underscore store up to four char until space else throw error of some kind.  Once characters are pulled send to conversion.
+  return "A";
+
+
+//switch
+
+}
+
+string CharacaterChanger(char charTestChar)
+{
+
+  charTestChar = toupper(charTestChar);
+
+  switch (charTestChar)
+  {
+    case 'A' :
+      return ".-";
+      break;  //Do I really need this break since I am already returning on the function?
+    case 'B' :
+      return "-...";
+      break;
+    case 'C' :
+      return "-.-.";
+      break;
+    case 'D' :
+      return "-..";
+      break;
+    case 'E':
+      return ".";
+      break;
+    case 'F' :
+      return "..-.";
+      break;
+    case 'G' :
+      return "--.";
+      break;
+    case 'H' :
+      return "....";
+      break;
+    case 'I' :
+      return "..";
+      break;
+    case 'J' :
+      return ".---";
+      break;
+    case 'K' :
+      return "-.-";
+      break;
+    case 'L' :
+      return ".-..";
+      break;
+    case 'M' :
+      return "--";
+      break;
+    case 'N' :
+      return "-.";
+      break;
+    case 'O' :
+      return "---";
+      break;
+    case 'P' :
+      return ".--.";
+      break;
+    case 'Q' :
+      return "--.-";
+      break;
+    case 'R' :
+      return ".-.";
+      break;
+    case 'S' :
+      return "...";
+      break;
+    case 'T' :
+      return "-";
+      break;
+    case 'U' :
+      return "..-";
+      break;
+    case 'V' :
+      return "...-";
+      break;
+    case 'W' :
+      return ".--";
+      break;
+    case 'X' :
+      return "-..-";
+      break;
+    case 'Y' :
+      return "-.--";
+      break;
+    case 'Z' :
+      return "__..";
+      break;
+    case '1' :
+      return ".----";
+      break;
+    case '2' :
+      return "..---";
+      break;
+    case '3' :
+      return "...--";
+      break;
+    case '4' :
+      return "....-";
+      break;
+    case '5' :
+      return ".....";
+      break;
+    case '6' :
+      return "-....";
+      break;
+    case '7' :
+      return "--...";
+      break;
+    case '8' :
+      return "---..";
+      break;
+    case '9' :
+      return "----.";
+      break;
+    case '0' :
+      return "----";
+      break;
+    default :
+      return " ";
+      break;
+
+  }
 }
