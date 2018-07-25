@@ -56,6 +56,7 @@ int main ()
   string UserInput;
   string AlphaString;
   string MorseString;
+
   char TestChar;
 
 
@@ -67,18 +68,32 @@ int main ()
 //rough idea on how to interactively pull character input.
 
   do {
+    int intMorseLooper = 0;
+    string InnerMorseString = "";
+
     TestChar = _getch();
 
     //test to make certain if valid character for Alpha or Morse.  If valid output to screen and store in string otherwise ignore.
 
-    if ((int(TestChar) == 45) || (int(TestChar) == 46))
+    while ((int(TestChar) == 45) || (int(TestChar) == 46))
     {
       //Enter Morse loop.  Loop through up to five characters to test for junk.  If alpha or space break out of loop and return to main loop processing.
       cout << TestChar;
       UserInput.append(1,TestChar);
-      cout << CharacaterChanger(".");
+      //cout << CharacaterChanger(".");
+      InnerMorseString.append(1,TestChar);
+      TestChar = _getch();
+      intMorseLooper++;
+    cout << "InnerMorseString in loop" << InnerMorseString << endl;
+      if ((intMorseLooper > 5) || (int(TestChar) == 32) || (TestChar == '\n'))
+      {
+        CharacaterChanger(InnerMorseString);
+        break;
+      }
 
     }
+//test
+//cout << "MorseLooper outloop" << intMorseLooper << endl;
 
     //if Alpha send to conversion.
     //If period or underscore store up to five char until space else throw error of some kind.  Once characters are pulled send to conversion.
@@ -111,7 +126,7 @@ of the array with the matching Morse string.
 
 //if Alpha send to conversion.
 //If period or underscore store up to four char until space else throw error of some kind.  Once characters are pulled send to conversion.
-  return "A";
+  return "MORSE";
 
 
 //switch
