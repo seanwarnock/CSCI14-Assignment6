@@ -77,23 +77,20 @@ int main ()
 
     while ((int(TestChar) == 45) || (int(TestChar) == 46))
     {
-      //Enter Morse loop.  Loop through up to five characters to test for junk.  If alpha or space break out of loop and return to main loop processing.
+      //Enter Morse loop.  Loop through up to six characters to test.  If alpha or space break out of loop and return to main loop processing.
       cout << TestChar;
       UserInput.append(1,TestChar);
       //cout << CharacaterChanger(".");
       InnerMorseString.append(1,TestChar);
-      TestChar = _getch();
       intMorseLooper++;
     cout << "InnerMorseString in loop" << InnerMorseString << endl;
       if ((intMorseLooper > 5) || (int(TestChar) == 32) || (TestChar == '\n'))
       {
-        CharacaterChanger(InnerMorseString);
+        cout << CharacaterChanger(InnerMorseString);
         break;
       }
-
+      TestChar = _getch();
     }
-//test
-//cout << "MorseLooper outloop" << intMorseLooper << endl;
 
     //if Alpha send to conversion.
     //If period or underscore store up to five char until space else throw error of some kind.  Once characters are pulled send to conversion.
@@ -106,8 +103,13 @@ int main ()
     }
 
     //period                   Dash
+//Check for Morse character or if the morse string is <> zero length.
+//  Then if space or alpha character is in the temp character then complete Morse processing and clear Morse string.
+//  Else add character to Morse string.
+//If alpha character then do alpha processing.
+//If space print space
 
-
+//This runs until the newline character.
   }while (int(TestChar) != 13);
   cout << endl;
   system("pause");
