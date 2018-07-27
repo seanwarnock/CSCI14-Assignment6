@@ -43,6 +43,9 @@ struct CharacterList
     // character converter.. use ASCII values to match.
   };
 
+void AlphatoMorse();
+void MorsetoAlpha();
+
 string CharacaterChanger(string);
 string CharacaterChanger(char);
 
@@ -58,49 +61,91 @@ int main ()
   string MorseString;
 
   char TestChar;
-
+  char charMenuChoice;
 
 //Program
   SetConsoleTitle(ASSIGNMENT);
   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-  cout << "Type in what you want to translate.  Press enter to send." << endl;
-  cout << "Single space between letters and double space between words." << endl;
+
+do {
+    system("cls");
+    cout << "[1] Translate from alphanumeric to Morse code." << endl;
+    cout << "[2] Translate from Morse code to alphanumeric." << endl;
+    cout << "[3] Translate from either alphanumeric and/or Morse code to both."  << endl;
+    cout << "[9] Exit program." << endl;
+
+    cin >> charMenuChoice;
+
+    switch (charMenuChoice)
+    {
+      case '1' :
+        cout << "Alpha to Morse.";
+        AlphatoMorse();
+        break;
+      case '2' :
+        cout << "Morse to Alpha.";
+        MorsetoAlpha();
+        break;
+      case '3' :
+        cout << "Uber translator. (Work in Progress)";
+        break;
+      case '9' :
+        cout << "Later Aligator.";
+        break;
+    }
+
+
+
 //rough idea on how to interactively pull character input.
 
-  do {
-    int intMorseLooper = 0;
-    string InnerMorseString = "";
 
-    TestChar = _getch();
 
-    //test to make certain if valid character for Alpha or Morse.  If valid output to screen and store in string otherwise ignore.
 
-    while ((int(TestChar) == 45) || (int(TestChar) == 46))
-    {
-      //Enter Morse loop.  Loop through up to six characters to test.  If alpha or space break out of loop and return to main loop processing.
-      cout << TestChar;
-      UserInput.append(1,TestChar);
-      //cout << CharacaterChanger(".");
-      InnerMorseString.append(1,TestChar);
-      intMorseLooper++;
-    cout << "InnerMorseString in loop" << InnerMorseString << endl;
-      if ((intMorseLooper > 5) || (int(TestChar) == 32) || (TestChar == '\n'))
+  }while (charMenuChoice != '9');
+}
+
+/*
+
+    cout << "Type in what you want to translate.  Press enter to send." << endl;
+    cout << "Single space between letters and double space between words." << endl;
+
+
+
+   do
       {
-        cout << CharacaterChanger(InnerMorseString);
-        break;
-      }
-      TestChar = _getch();
-    }
+        int intMorseLooper = 0;
+        string InnerMorseString = "";
+
+        TestChar = _getch();
+
+        //test to make certain if valid character for Alpha or Morse.  If valid output to screen and store in string otherwise ignore.
+
+        while ((int(TestChar) == 45) || (int(TestChar) == 46))
+        {
+          //Enter Morse loop.  Loop through up to six characters to test.  If alpha or space break out of loop and return to main loop processing.
+          cout << TestChar;
+          UserInput.append(1,TestChar);
+          //cout << CharacaterChanger(".");
+          InnerMorseString.append(1,TestChar);
+          intMorseLooper++;
+          cout << "InnerMorseString in loop" << InnerMorseString << endl;
+          if ((intMorseLooper > 5) || (int(TestChar) == 32) || (TestChar == '\n'))
+          {
+            cout << CharacaterChanger(InnerMorseString);
+            break;
+          }
+          TestChar = _getch();
+        }
 
     //if Alpha send to conversion.
     //If period or underscore store up to five char until space else throw error of some kind.  Once characters are pulled send to conversion.
     //     Capitol Letters                                  Lowercase Letters                                      Numeric                                             space
-    if ( ((int(TestChar) >= 65) && (int(TestChar <= 90))) || ((int(TestChar) >= 97) && (int(TestChar) <= 122)) || ((int(TestChar) >= 48) && (int(TestChar) <= 57)) || (int(TestChar) == 32) )
-    {
-      cout << TestChar; //<< " Integer value " << int(TestChar);
-      UserInput.append(1,TestChar);
-      cout << CharacaterChanger(TestChar);
-    }
+        if ( ((int(TestChar) >= 65) && (int(TestChar <= 90))) || ((int(TestChar) >= 97) && (int(TestChar) <= 122)) || ((int(TestChar) >= 48) && (int(TestChar) <= 57)) || (int(TestChar) == 32) )
+        {
+          cout << TestChar; //<< " Integer value " << int(TestChar);
+          UserInput.append(1,TestChar);
+          cout << CharacaterChanger(TestChar);
+        }
 
     //period                   Dash
 //Check for Morse character or if the morse string is <> zero length.
@@ -110,29 +155,239 @@ int main ()
 //If space print space
 
 //This runs until the newline character.
-  }while (int(TestChar) != 13);
+      }while (charMenuChoice != '9');
+    cout << endl;
+    system("pause");
+
+    system("cls");
+    cout << "You typed" << endl;
+    cout << UserInput;
+    system("pause");
+    cout << "Run again [Y]n ?";
+    cin >> charMenuChoice;
+
+
+*/
+
+void AlphatoMorse()
+{
+  string stringAlphaString;
+  int n;
+
+  system("cls");
+  cout << "Please type in a sentence to convert to Morse Code: " << endl;
+  cin.ignore();
+  getline(cin,stringAlphaString);
+
+  system("cls");
+  cout << "Alpha Numeric:" << endl << stringAlphaString << endl;
+  cout << "Morse Code:" << endl << endl;
+  for (n=0;n<(stringAlphaString.size());n++)
+  {
+      cout << CharacaterChanger(stringAlphaString[n]);
+  }
   cout << endl;
   system("pause");
 
+
+}
+
+void MorsetoAlpha()
+{
+  string stringMorseString;
+  string stringTempMorse = "";
+  int n;
+  //int intCharCounter = 0;
+
   system("cls");
-  cout << "You typed" << endl;
-  cout << UserInput;
+  cout << "Please type in a sentence to convert to Morse Code." << endl << "Use a single space between each Morse character and a double space between words: " << endl;
+  cin.ignore();
+  getline(cin,stringMorseString);
+
+  system("cls");
+  cout << "Morse Code:" << endl;
+  cout << stringMorseString << endl << endl;
+  cout << "Alpha Numeric:" << endl;
+
+  for (n=0;n<(stringMorseString.size());n++)
+  {
+//cout << "Character : "<< n << "\"" << stringMorseString[n] << "\"";
+      if ((stringMorseString[n] != ' ') && (stringTempMorse.size() < 6))
+      {
+        stringTempMorse+=stringMorseString[n];
+
+        //intCharCounter++;
+      }
+      else
+      {
+        cout << CharacaterChanger(stringTempMorse) << " ";
+        stringTempMorse.clear();
+        //intCharCounter = 0;
+      }
+      if (n == (stringMorseString.size() - 1))
+      {
+        //cout << "end string process: ";
+        //stringTempMorse+=stringMorseString[n];
+        cout << CharacaterChanger(stringTempMorse) << endl;
+      }
+
+  }
+  system("pause");
+
 }
 
 string CharacaterChanger(string charTestString)
 {
-/*
- pack the array with the entire ASCII 256 table.  Then fill the Morse side
-of the array with the matching Morse string.
-*/
+//Utter garbage but quick and dirty for getting the job done.
 
-//if Alpha send to conversion.
-//If period or underscore store up to four char until space else throw error of some kind.  Once characters are pulled send to conversion.
-  return "MORSE";
-
-
-//switch
-
+  if (charTestString ==  ".-")
+  {
+    return "A";
+  }
+  else if (charTestString ==  "-...")
+  {
+    return "B";
+  }
+  else if (charTestString ==  "-.-.")
+  {
+    return "C"    ;
+  }
+  else if (charTestString ==  "-..")
+  {
+    return "D"    ;
+  }
+  else if (charTestString ==  ".")
+  {
+    return "E"    ;
+  }
+  else if (charTestString ==  "..-.")
+  {
+    return "F"    ;
+  }
+  else if (charTestString ==  "--.")
+  {
+    return "G";
+  }
+  else if (charTestString ==  "....")
+  {
+    return "H";
+  }
+  else if (charTestString ==  "..")
+  {
+    return "I";
+  }
+  else if (charTestString ==  ".---")
+  {
+    return "J";
+  }
+  else if (charTestString ==  "-.-")
+  {
+    return "K";
+  }
+  else if (charTestString ==  ".-..")
+  {
+    return "L";
+  }
+  else if (charTestString ==  "--")
+  {
+    return "M";
+  }
+  else if (charTestString ==  "-.")
+  {
+    return "N";
+  }
+  else if (charTestString ==  "---")
+  {
+    return "O";
+  }
+  else if (charTestString ==  ".--.")
+  {
+    return "P";
+  }
+  else if (charTestString ==  "--.-")
+  {
+    return "Q";
+  }
+  else if (charTestString ==  ".-.")
+  {
+    return "R";
+  }
+  else if (charTestString ==  "...")
+  {
+    return "S";
+  }
+  else if (charTestString ==  "-")
+  {
+    return "T";
+  }
+  else if (charTestString ==  "..-")
+  {
+    return "U";
+  }
+  else if (charTestString ==  "...-")
+  {
+    return "V";
+  }
+  else if (charTestString ==  ".--")
+  {
+    return "W";
+  }
+  else if (charTestString ==  "-..-")
+  {
+    return "X";
+  }
+  else if (charTestString ==  "-.--")
+  {
+    return "Y";
+  }
+  else if (charTestString ==  "__..")
+  {
+    return "Z";
+  }
+  else if (charTestString ==  ".----")
+  {
+    return "1";
+  }
+  else if (charTestString ==  "..---")
+  {
+    return "2";
+  }
+  else if (charTestString ==  "...--")
+  {
+    return "3";
+  }
+  else if (charTestString ==  "....-")
+  {
+    return "4";
+  }
+  else if (charTestString ==  ".....")
+  {
+    return "5";
+  }
+  else if (charTestString ==  "-....")
+  {
+    return "6";
+  }
+  else if (charTestString ==  "--...")
+  {
+    return "7";
+  }
+  else if (charTestString ==  "---..")
+  {
+    return "8";
+  }
+  else if (charTestString ==  "----.")
+  {
+    return "9";
+  }
+  else if (charTestString ==  "----")
+  {
+    return "0";
+  }
+  else
+  {
+    return "";
+  }
 }
 
 string CharacaterChanger(char charTestChar)
@@ -250,8 +505,11 @@ string CharacaterChanger(char charTestChar)
     case '0' :
       return "----";
       break;
-    default :
+    case ' ' :
       return " ";
+      break;
+    default :
+      return "";
       break;
 
   }
